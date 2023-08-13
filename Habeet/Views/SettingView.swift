@@ -11,11 +11,11 @@ struct SettingView: View {
     @State private var ifShowMenu:Bool=false
     @State private var ifShowTarget:Bool=false
     @State private var showWhichView:Int=5
+    @State private var ifDelete:Bool=false
     var body: some View {
         ZStack{
             VStack(alignment: .leading){
-                NavView(ifShowMenu: $ifShowMenu)
-                    .padding(.leading,-20)
+                NavView(ifShowMenu: $ifShowMenu,showWhichView:$showWhichView,ifDelete:$ifDelete)                    .padding(.leading,-20)
                     .padding(.bottom,20)
                 Text("更换模式")
                     .foregroundColor(.secondary)

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DrawerMenu: View {
+    @EnvironmentObject private var userData: UserData
+    
     @Binding var isDrawerOpen: Bool
     @Binding var ifShowTarget: Bool
     @Binding var showWhichView:Int
@@ -30,7 +32,7 @@ struct DrawerMenu: View {
                                 geometry.size.width / 2 // Align to the left half of the screen
                             }
                             .padding(.leading,30).padding(.bottom,10)
-                        Text("emmmmm")      //动态
+                        Text(userData.userName)      //动态
                             .bold()
                             .font(.title2)
                             .alignmentGuide(HorizontalAlignment.leading) { _ in
@@ -460,9 +462,9 @@ struct DrawerMenu: View {
                         Button{
                             showWhichView=6
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                        // 2秒后触发计时器
-                                        timerTriggered = true
-                                    }
+                                // 2秒后触发计时器
+                                timerTriggered = true
+                            }
 
                         }label: {
                             //关于
@@ -489,7 +491,11 @@ struct DrawerMenu: View {
                     
                     
                     Button{
-                        showWhichView=7
+                        showWhichView=13
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            // 2秒后触发计时器
+                            timerTriggered = true
+                        }
                     }label: {
                         //登出
                         HStack{
@@ -529,6 +535,6 @@ struct Previews_DrawerMenu_Previews: PreviewProvider {
         let isDrawerOpen = Binding.constant(true)
         let showWhichView = Binding.constant(0)
         let ifShowTarget=Binding.constant(false)
-        DrawerMenu(isDrawerOpen: isDrawerOpen, ifShowTarget: ifShowTarget, showWhichView: showWhichView)
+        DrawerMenu(isDrawerOpen: isDrawerOpen, ifShowTarget: ifShowTarget, showWhichView: showWhichView).environmentObject(UserData())
     }
 }
